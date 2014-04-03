@@ -8,7 +8,7 @@
 <body>
     <div id="boardDiv">
     </div>
-
+    Total steps:&nbsp;<div id="stepCount"></div>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/LaugtonAntEngine.js"></script>
@@ -44,16 +44,22 @@
         var e3 = new LangtonAntEngine(size, 'cell_', 'Solid');
         var e4 = new LangtonAntEngine(size, 'cell_', 'Solid');
 
+        var totalSteps = 0;
+
         e1.NextStep();
         e2.NextStep();
         e3.NextStep();
         e4.NextStep();
+        totalSteps++;
+        $("#stepCount").text(totalSteps);
         var sec = this.speed * 1000;
         setInterval(function () {
             e1.NextStep();
             e2.NextStep();
             e3.NextStep();
             e4.NextStep();
+            totalSteps++;
+            $("#stepCount").text(totalSteps);
         }, sec);
     });
 
