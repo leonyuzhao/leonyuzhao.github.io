@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Laugton's Ant</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="boardDiv">
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/LaugtonAntEngine.js"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    function BuildBoard(size) {
+        var pos = 0;
+        var board = "";
+        board += "<table>";
+        for (var i = 0; i < size; i++) {
+            board += "<tr>";
+            for (var j = 0; j < size; j++) {
+                board += "<td id='cell_" + pos + "' class='Cell'></td>";
+                pos++;
+            }
+            board += "</tr>";
+        }
+        board += "</table>";
+        $("#boardDiv").append(board);
+    }
+
+    $(document).ready(function () {
+        var size = 128;
+        var speed = 0.1;
+
+        BuildBoard(size);
+
+        var e1 = new LangtonAntEngine(size, 'cell_', 'Solid');
+        var e2 = new LangtonAntEngine(size, 'cell_', 'Solid');
+        var e3 = new LangtonAntEngine(size, 'cell_', 'Solid');
+        var e4 = new LangtonAntEngine(size, 'cell_', 'Solid');
+
+        e1.NextStep();
+        e2.NextStep();
+        e3.NextStep();
+        e4.NextStep();
+        var sec = this.speed * 1000;
+        setInterval(function () {
+            e1.NextStep();
+            e2.NextStep();
+            e3.NextStep();
+            e4.NextStep();
+        }, sec);
+    });
+
+</script>
