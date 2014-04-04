@@ -1,0 +1,13 @@
+﻿TABLE {
+    border-collapse: collapse;
+}
+
+TD.Cell {
+    border: solid 1px black;
+    width: 1px;
+    height: 1px;
+}
+
+TD.Solid {
+    background-color: Black;
+}

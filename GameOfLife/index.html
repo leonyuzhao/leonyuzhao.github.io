@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Conway's Game of Life</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="boardDiv">
+    </div>
+    Total generations:&nbsp;<div id="generationCount"></div>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/GameOfLifeEngine.js"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    function BuildBoard(nodes) {
+        var pos = 0;
+        var board = "";
+        var size = Math.sqrt(nodes.length);
+        board += "<table>";
+        for (var i = 0; i < size; i++) {
+            board += "<tr>";
+            for (var j = 0; j < size; j++) {
+                board += "<td id='cell_" + pos + "' class='Cell'></td>";
+                pos++;
+            }
+            board += "</tr>";
+        }
+        board += "</table>";
+        $("#boardDiv").append(board);
+    }
+
+    function UpdateBoard(nodes) {
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].value == 1) {
+                $("#cell_" + i).addClass("Solid");
+            }
+            else {
+                $("#cell_" + i).removeClass("Solid");
+            }
+        }
+    }
+
+    $(document).ready(function () {
+        var size = 256;
+        var speed = 0.1;
+
+        var engine = new GameOfLifeEngine(size);
+        BuildBoard(engine.nodes);
+        var totalGenerations = 0;
+        totalGenerations++;
+        $("#generationCount").text(totalGenerations);
+        var sec = speed * 1000;
+        setInterval(function () {
+            engine.NextGeneration();
+            UpdateBoard(engine.nodes);
+            totalGenerations++;
+            $("#generationCount").text(totalGenerations);
+        }, sec);
+    });
+    
+</script>
